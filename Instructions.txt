@@ -1,0 +1,6 @@
+// Backend
+
+- cd Backend
+- npx nodemon
+
+//
