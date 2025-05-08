@@ -11,6 +11,11 @@ async function registerUser(req, res, next) {
     }
     const {fullname, email, password} = req.body;
 
+    const doesUserExist = usrModel.findOne({email});
+    if(doesUserExist){
+        return res.status(401).json({message: "User Already Exists"});
+    }
+
     console.log(req.body);
 
     const hashedPassword = await usrModel.hashPassword(password);

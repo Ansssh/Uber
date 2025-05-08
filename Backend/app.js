@@ -5,6 +5,7 @@ import express from 'express';
 import cors from 'cors'
 import cookie from 'cookie-parser'
 import routes from './routes/user.routes.js';
+import CapRoutes from './routes/captain.routes.js';
 
 import db from './db/db.js'
 db()
@@ -19,6 +20,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookie())
 
 app.use('/users', routes);
+app.use('/captain', CapRoutes);
 
 app.get('/', (req,res)=>{
     res.send("Hello!");
