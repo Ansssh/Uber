@@ -1,7 +1,7 @@
 import usrModel from '../models/user.model.js';
 import createUser from '../services/user.service.js';
 import {validationResult} from 'express-validator';
-import blackList from '../models/blacklist.token.js'
+import blackList from '../models/blacklist.token.js';
 
 
 async function registerUser(req, res, next) {
@@ -60,10 +60,10 @@ async function getUserProfile(req, res, next) {
 }
 
 async function logoutUser(req, res, next){
-    res.clearCookie('token');
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
-
     await blackList.create({token});
+    res.clearCookie('token');
+
     res.status(200).json({message: 'logged Out'})
 }
 

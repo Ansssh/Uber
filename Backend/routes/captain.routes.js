@@ -1,7 +1,8 @@
 import express from 'express';
 const router = express.Router();
 import { body } from 'express-validator';
-import capController from '../controllers/captain.controller.js';
+import { registerCC, loginCC, getCCProfile, logoutCC } from '../controllers/captain.controller.js';
+import { authCaptain } from '../middleware/auth.middleware.js';
 
 
 router.post('/register', [
@@ -12,8 +13,16 @@ router.post('/register', [
     body('vehicle.capacity').isInt({min:1}).withMessage("Where the passenger gonna sit?"),
     body('vehicle.plate').isLength({min:6}).withMessage("Premium?"),
     body('vehicle.vehicleType').isIn(['car', 'bike', 'tuktuk', 'auto']).withMessage("Jhaaaj chuki Firda?")
-], capController
+], registerCC
 )
 
+router.post('/login', [
+    body('email').isEmail().withMessage("Invalid Email"),
+    body('password').isLength({min:6}).withMessage("Atleast 6 characters Fella")
+], loginCC)
+
+router.get('/profile', authCaptain, getCCProfile);
+
+router.get('/logout', authCaptain, logoutCC);
 
 export default router;
