@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from '../assets/logo.svg';
 import captainhat from '../assets/captain.svg';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/userContext";
+import axios from 'axios'
 
 const userLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [userData, setUserData] = useState({});
+
+    const {user, setUser} = useContext(UserDataContext);
+    const navi = useNavigate()
     return (
         <div className="h-screen flex flex-col items-center justify-center">
             <Link to={'/'}><img src={logo} alt="logo" className='absolute top-0 left-0 w-30' /></Link>
@@ -16,10 +20,20 @@ const userLogin = () => {
             </Link>
             
 
-            <form action="" onSubmit={(e)=>{
+            <form action="" onSubmit={async (e)=>{
                 e.preventDefault();
-                setUserData({email: email, password: password});
-                console.log(userData);
+                const userData = {
+                    email: email,
+                    password: password
+                }
+                const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData);
+
+                if(response.status === 200){
+                    const data = response.data;
+                    setUser(userData);
+                    localStorage.setItem("token", data.token);
+                    navi('/home');
+                }
             }} className="bg-[#222233] sm:w-100 w-70 h-auto shadow-lg rounded-lg flex flex-col p-3 m-2">
                 <div className="text-4xl font-extrabold text-center mb-8 text-white">Welcome Back!</div>
                 <label htmlFor="name" className = "block text-sm font-medium text-[#c0c0c8] mb-1">Your Email</label>

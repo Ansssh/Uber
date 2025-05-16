@@ -43,7 +43,7 @@ const captainSignup = () => {
                 <input type='email' id="mail" onChange={(e) => { setEmail(e.target.value) }} value={email} className={`bg-[#c0c0c8] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#DDA15E] focus:border-[#BC6C25] focus:bg-white block w-full p-2.5 mb-2`} placeholder='email@example.co' required />
                 <label htmlFor="password" className="block text-sm font-medium text-[#c0c0c8] mb-1">Password</label>
                 <input type="password" onChange={(e) => { setPassword(e.target.value) }} value={password} className="bg-[#c0c0c8] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#DDA15E] focus:border-[#BC6C25] focus:bg-white block w-full p-2.5 mb-2" required placeholder="123456789" />
-                <button className="bg-[#1fbad6] rounded-lg shadow-sm text-white font-bold w-full p-2.5">Login</button>
+                <button className="bg-[#1fbad6] rounded-lg shadow-sm text-white font-bold w-full p-2.5">Create Account</button>
             </form>
             <span className="font-bold">Already have an account? <Link to={'/cap-login'} className="text-blue-500 underline">Log in</Link></span>
             <p className='sm:text-[12px] text-[9px] absolute bottom-3'>By registering you're accepting our privacy policy</p>

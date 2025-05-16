@@ -20,7 +20,7 @@ router.post('/login', [
     body('email').isEmail().withMessage("Invalid Email"),
     body('password').isLength({min:6}).withMessage("Atleast 6 characters Fella")
 ], loginCC)
-
+// zustand
 router.get('/profile', authCaptain, getCCProfile);
 
 router.get('/logout', authCaptain, logoutCC);
