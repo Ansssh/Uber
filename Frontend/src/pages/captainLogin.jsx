@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import logo from '../assets/logo.svg';
 import userAvatar from '../assets/user.svg';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { CaptainDataContext } from "../context/captainContext";
+import axios from "axios";
+
 
 const captainLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [captainData, setCaptainData] = useState({});
+    // const [captainData, setCaptainData] = useState({});
+    const navigate = useNavigate();
+    const {captain, setCaptain} = React.useContext(CaptainDataContext)
     return (
         <div className="h-screen flex flex-col items-center justify-center">
             <Link to={'/'}><img src={logo} alt="logo" className='absolute top-0 left-0 w-30' /></Link>
@@ -16,10 +22,19 @@ const captainLogin = () => {
             </Link>
 
 
-            <form action="" onSubmit={(e) => {
+            <form action="" onSubmit={async (e) => {
                 e.preventDefault();
-                setCaptainData({ email: email, password: password });
-                console.log(captainData);
+                const cap = { email: email, password: password };
+
+                const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/login`, cap);
+
+                if(res.status === 200){
+                    const {data} = res;
+                    setCaptain(data.captain);
+                    localStorage.setItem('token', data.token);
+                    navigate('/captain-home');
+                }
+
             }} className="bg-[#222233] sm:w-100 w-70 h-auto shadow-lg rounded-lg flex flex-col p-3 m-2">
                 <div className="text-4xl font-extrabold text-center mb-8 text-white">Welcome Capt'n!</div>
                 <label htmlFor="name" className="block text-sm font-medium text-[#c0c0c8] mb-1">Your Email</label>

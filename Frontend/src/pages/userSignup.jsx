@@ -45,7 +45,7 @@ const userSignup = () => {
                     navigate('/home')
                 }
             }} className="bg-[#222233] sm:w-100 w-75 h-auto shadow-lg rounded-lg flex flex-col p-3 m-2">
-                <div className="text-4xl font-extrabold text-center mb-8 text-white">Welcome!</div>
+                <div className="text-4xl font-extrabold text-center mb-8 text-white">Hello there!</div>
                 <label htmlFor="fname" className="block text-sm font-medium text-[#c0c0c8] mb-2">Whats your name</label>
 
                 <div className='flex gap-4'>

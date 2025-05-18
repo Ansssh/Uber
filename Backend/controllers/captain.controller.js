@@ -7,7 +7,7 @@ import blackList from '../models/blacklist.token.js';
 async function registerCC(req, res, next) {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.status(409).json({errors: errors.array()})
+        return res.status(400).json({errors: errors.array()})
     }
     const {fullname, email, password, vehicle} = req.body;
 

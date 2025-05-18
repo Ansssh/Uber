@@ -1,48 +1,49 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import React from 'react'
+// import axios from 'axios'
+// import { Navigate } from 'react-router-dom';
 
-const UserLogout = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+// const userLogout = () => {
+//     const token = localStorage.getItem('token');
+//     axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`, {
+//         headers:{
+//             Authorization: `Bearer ${token}`
+//         }
+//     }).then((res)=>{
+//         if(res.status === 200){
+//             localStorage.removeItem('token');
+//             <Navigate to={'/login'}/>
+//         }
+//     })
+//   return (
+//     <div>userLogout</div>
+//   )
+// }
 
-  useEffect(() => {
-    const logoutUser = async () => {
-      if (!token) {
-        navigate('/login'); 
-        return;
-      }
+// export default userLogout
 
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+import React from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-        if (res.status === 200) {
-          localStorage.removeItem('token');
-          navigate('/login');
-          console.log("Logout successful");
-        } else {
-          console.error("Logout failed with status:", res.status, res.data);
-          // Handle other error statuses if needed
-          localStorage.removeItem('token'); // Still clear the token on the frontend
-          navigate('/login'); // Redirect to login even if logout API fails (optional, depends on your logic)
+export const UserLogout = () => {
+
+    const token = localStorage.getItem('token')
+    const navigate = useNavigate()
+
+    axios.get(`${import.meta.env.VITE_API_URL}/users/logout`, {
+        headers: {
+            Authorization: `Bearer ${token}`
         }
-      } catch (error) {
-        console.error("Logout error:", error);
-        localStorage.removeItem('token');
-        navigate('/login'); 
-      }
-    };
+    }).then((response) => {
+        if (response.status === 200) {
+            localStorage.removeItem('token')
+            navigate('/login')
+        }
+    })
 
-    logoutUser();
-  }, [navigate, token]);
+    return (
+        <div>UserLogout</div>
+    )
+}
 
-  return (
-    <div>Logging out...</div>
-  );
-};
-
-export default UserLogout;
+export default UserLogout
