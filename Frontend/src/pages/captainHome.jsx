@@ -11,6 +11,7 @@ import auto from '../assets/tuktuk.png'
 import CaptainDetails from '../components/CaptainDetails';
 import RidePopUp from '../components/RidePopUp';
 import ConfirmRidePopup from '../components/ConfirmRidePopup';
+import LiveLocationMap from '../components/LiveLocation';
 
 const captainHome = () => {
     const captainDetailsRef = useRef(null);
@@ -71,14 +72,16 @@ const captainHome = () => {
             <div className='h-screen w-screen relative flex flex-col overflow-hidden'>
                 <Link to={'/'}><img src={logo} alt="logo" className='absolute top-0 left-0 w-30' /></Link>
                 <Link to={'/cap/logout'}><i className="ri-logout-box-r-line absolute top-0 right-0 text-4xl p-5"></i></Link>
-                <div className='h-3/5 w-screen'>
-                    <img
+                <div className='h-3/5 w-screen -z-1'>
+                    {/* <img
                         src="https://i.pinimg.com/736x/50/22/54/50225400f92f997e401be3a8a19df77f.jpg"
                         alt="img"
                         className='h-full w-full object-cover'
-                    />
+                    /> */}
+                    <LiveLocationMap/>
+                    
                 </div>
-                <div ref={captainDetailsRef} className='h-2/5 translate-y-0 w-screen flex flex-col justify-between p-4'>
+                <div ref={captainDetailsRef} className='h-2/5 translate-y-0 bg-white w-screen flex flex-col justify-between p-4'>
                     <CaptainDetails />
                 </div>
 

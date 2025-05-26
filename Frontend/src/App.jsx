@@ -13,6 +13,8 @@ import CaptainHome from './pages/captainHome';
 import CaptainLogout from './pages/captainLogout';
 import Riding from './pages/Riding';
 import CaptainRiding from './pages/CaptainRiding';
+// src/App.js or src/index.js
+import 'leaflet/dist/leaflet.css';
 
 const App = () => {
   return (

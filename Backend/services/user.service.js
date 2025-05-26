@@ -5,7 +5,7 @@ export default async function createUser({firstname, lastname, email, password})
     if(!firstname || !email || !password){
         throw new Error("All Fields are Required!");
     }
-    const user = usrModel.create({
+    const user =await usrModel.create({
         fullname:{
             firstname, lastname
         },

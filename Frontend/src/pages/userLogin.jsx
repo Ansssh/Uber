@@ -30,7 +30,7 @@ const userLogin = () => {
 
                 if(response.status === 200){
                     const data = response.data;
-                    setUser(userData);
+                    setUser(data.user);
                     localStorage.setItem("token", data.token);
                     navi('/home');
                 }

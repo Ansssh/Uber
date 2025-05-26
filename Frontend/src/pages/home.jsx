@@ -10,6 +10,8 @@ import ConfirmRidePanel from '../components/ConfirmedRidePanel';
 import LookingForDriver from '../components/LookingForDriver';
 
 import WaitForDriver from '../components/WaitingForDriver';
+import LiveLocationMap from '../components/LiveLocation';
+// import 'leaflet/dist/leaflet.css';
 
 const home = () => {
     const [location, setLocation] = useState("")
@@ -104,15 +106,11 @@ const home = () => {
             <Link to={'/'}><img src={logo} alt="logo" className='absolute top-0 left-0 w-30' /></Link>
 
 
-            <div className='h-screen w-screen' onClick={()=>{
+            <div className='h-screen w-screen z-[-1]' onClick={()=>{
                 setActive(false);
                 setVehiclePanelOpen(false);
             }}>
-                <img
-                    src="https://i.pinimg.com/736x/50/22/54/50225400f92f997e401be3a8a19df77f.jpg"
-                    alt="img"
-                    className='h-full w-full object-cover'
-                />
+                <LiveLocationMap></LiveLocationMap>
             </div>
             <div className={`h-auto absolute bottom-0 w-full sm:w-1/2 left-1/2 translate-x-[-50%] flex flex-col`}>
                 <div ref={forumRef} className={`p-5 relative bg-white ${active ? "" : "rounded-t-xl"}`}>

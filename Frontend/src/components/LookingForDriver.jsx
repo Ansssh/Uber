@@ -7,20 +7,20 @@ import auto from '../assets/tuktuk.png'
 const LookingForDriver = (props) => {
     const [title, setTitle] = useState("Looking For Driver...");
 
-    useEffect(() => {
-        const titleTimer = setTimeout(() => {
-            setTitle("Driver Found! Redirecting...");
-        }, 10000);
+    // useEffect(() => {
+    //     const titleTimer = setTimeout(() => {
+    //         setTitle("Driver Found! Redirecting...");
+    //     }, 10000);
 
-        const redirectTimer = setTimeout(() => {
-            props.setLookingForDriverPanelOpen(false);
-            props.setwaitForDriverPanel(true);
-        }, 20000);
-        return () => {
-            clearTimeout(titleTimer);
-            clearTimeout(redirectTimer);
-        };
-    }, []); 
+    //     const redirectTimer = setTimeout(() => {
+    //         props.setLookingForDriverPanelOpen(false);
+    //         props.setwaitForDriverPanel(true);
+    //     }, 20000);
+    //     return () => {
+    //         clearTimeout(titleTimer);
+    //         clearTimeout(redirectTimer);
+    //     };
+    // }, []); 
 
     return (
         <>
