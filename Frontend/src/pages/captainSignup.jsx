@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { CaptainDataContext } from '../context/captainContext';
+import { CaptainDataContext } from '../context/CaptainContext';
 import logo from '../assets/logo.svg';
 import axios from 'axios';
 

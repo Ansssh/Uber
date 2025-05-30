@@ -14,7 +14,7 @@ import WaitForDriver from '../components/WaitingForDriver';
 import LiveLocationMap from '../components/LiveLocation';
 
 import { useContext } from 'react';
-import { UserDataContext } from '../context/userContext';
+import { UserDataContext } from '../context/UserContext';
 import { SocketContext } from '../context/SocketContext';
 
 const Home = () => {

@@ -16,7 +16,7 @@ import LiveLocationMap from '../components/LiveLocation';
 
 import { SocketContext } from '../context/SocketContext';
 import { useContext } from 'react';
-import { CaptainDataContext } from '../context/captainContext';
+import { CaptainDataContext } from '../context/CaptainContext';
 
 
 const captainHome = () => {

@@ -14,7 +14,7 @@
 // export default captainProtectWrapper
 
 import React, { useContext, useEffect, useState } from 'react'
-import { CaptainDataContext } from '../context/captainContext.jsx'
+import { CaptainDataContext } from '../context/CaptainContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
