@@ -17,7 +17,9 @@ db()
 
 const app = express();
 
-app.use(cors()); // Use Domain here!!
+app.use(cors({
+  origin: 'https://uber-swart-one.vercel.app'
+})); // Use Domain here!!
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookie())
