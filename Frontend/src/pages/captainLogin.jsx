@@ -3,7 +3,7 @@ import logo from '../assets/logo.svg';
 import userAvatar from '../assets/user.svg';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { CaptainDataContext } from "../context/captainContext";
+import { CaptainDataContext } from "../context/CaptainContext";
 import axios from "axios";
 
 
