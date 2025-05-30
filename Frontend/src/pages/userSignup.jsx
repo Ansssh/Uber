@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import logo from '../assets/logo.svg';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import {UserDataContext} from '../context/userContext';
+import {UserDataContext} from '../context/UserContext';
 
 
 const userSignup = () => {
