@@ -7,6 +7,7 @@ import cookie from 'cookie-parser'
 import routes from './routes/user.routes.js';
 import CapRoutes from './routes/captain.routes.js';
 import mapRoutes from './routes/map.routes.js';
+import Rides from './routes/ride.routes.js';
 import axios from 'axios';
 
 import db from './db/db.js'
@@ -24,6 +25,7 @@ app.use(cookie())
 app.use('/users', routes);
 app.use('/captain', CapRoutes);
 app.use('/map', mapRoutes);
+app.use('/rides', Rides);
 
 app.get('/', (req,res)=>{
 

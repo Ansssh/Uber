@@ -10,7 +10,7 @@ const VehicleListPanel = (props) => {
             <div className='p-5 bg-white flex flex-col gap-3'>
                 <h4 className='text-2xl font-bold'>Choose a vehicle</h4>
                 <i onClick={() => { props.setVehiclePanelOpen(false) }} className={`ri-arrow-down-wide-line ri-xl cursor-pointer absolute right-6 top-7 ${props.vehiclePanelOpen ? "rotate-0" : 'rotate-180'}`}></i>
-                <div className='flex justify-between items-center border-2 border-transparent hover:border-black rounded-xl' onClick={()=>{
+                <div className='flex justify-between items-center border-2 border-transparent hover:border-black rounded-xl' onClick={() => {
                     props.setConfirmRidePanelOpen(true);
                     props.setVehiclePanelOpen(false);
                     props.setVehicleSelected('car');
@@ -21,9 +21,9 @@ const VehicleListPanel = (props) => {
                         <h5 className='text-xs'>2 mins away</h5>
                         <p className='text-xs'>Affordable, Compact Ride</p>
                     </div>
-                    <h2 className='sm:text-2xl text-lg font-semibold mr-2'>$25.69</h2>
+                    <h2 className='sm:text-2xl text-lg font-semibold mr-2'>₹{props.fare.car}</h2>
                 </div>
-                <div className='flex justify-between items-center border-2 border-transparent hover:border-black rounded-xl' onClick={()=>{
+                <div className='flex justify-between items-center border-2 border-transparent hover:border-black rounded-xl' onClick={() => {
                     props.setConfirmRidePanelOpen(true);
                     props.setVehiclePanelOpen(false);
                     props.setVehicleSelected('bike');
@@ -34,9 +34,9 @@ const VehicleListPanel = (props) => {
                         <h5 className='text-xs'>7 mins away</h5>
                         <p className='text-xs'>Affordable, Motorcycle Ride</p>
                     </div>
-                    <h2 className='sm:text-2xl text-lg font-semibold mr-2'>$5.69</h2>
+                    <h2 className='sm:text-2xl text-lg font-semibold mr-2'>₹{props.fare.motorcycle}</h2>
                 </div>
-                <div className='flex justify-between items-center border-2 border-transparent hover:border-black rounded-xl' onClick={()=>{
+                <div className='flex justify-between items-center border-2 border-transparent hover:border-black rounded-xl' onClick={() => {
                     props.setConfirmRidePanelOpen(true);
                     props.setVehiclePanelOpen(false);
                     props.setVehicleSelected('auto');
@@ -47,7 +47,7 @@ const VehicleListPanel = (props) => {
                         <h5 className='text-xs'>4 mins away</h5>
                         <p className='text-xs'>Affordable, tuktuk Ride</p>
                     </div>
-                    <h2 className='sm:text-2xl text-lg font-semibold mr-2'>$10.69</h2>
+                    <h2 className='sm:text-2xl text-lg font-semibold mr-2'>₹{props.fare.auto}</h2>
                 </div>
             </div>
         </>

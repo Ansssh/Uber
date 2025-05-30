@@ -1,4 +1,5 @@
 import axios from 'axios';
+import captainModel from '../models/captain.model.js';
 
 async function getAddressCoordinates(address) {
     if (!address) {
@@ -28,6 +29,38 @@ async function getAddressCoordinates(address) {
 
 
 // New: getDistanceTime using OSRM public API
+// async function getDistanceTime(originAddress, destinationAddress) {
+//     if (!originAddress || !destinationAddress) {
+//         throw new Error('Origin and destination are required.');
+//     }
+//     try {
+//         // Convert addresses to coordinates
+//         const originCoords = await getAddressCoordinates(originAddress);
+//         const destinationCoords = await getAddressCoordinates(destinationAddress);
+
+//         // Format as lon,lat for OSRM
+//         const origin = `${originCoords.lon},${originCoords.lat}`;
+//         const destination = `${destinationCoords.lon},${destinationCoords.lat}`;
+
+//         // Call OSRM API
+//         const response = await axios.get(`https://router.project-osrm.org/route/v1/driving/${origin};${destination}`, {
+//             params: {
+//                 overview: 'false',
+//                 alternatives: false,
+//                 steps: false
+//             }
+//         });
+//         if (response.data && response.data.routes && response.data.routes.length > 0) {
+//             const { distance, duration } = response.data.routes[0];
+//             return { distance, duration };
+//         } else {
+//             throw new Error('No distance or time found for the given locations.');
+//         }
+//     } catch (error) {
+//         throw new Error('Failed to fetch distance and time.');
+//     }
+// }
+
 async function getDistanceTime(originAddress, destinationAddress) {
     if (!originAddress || !destinationAddress) {
         throw new Error('Origin and destination are required.');
@@ -36,6 +69,9 @@ async function getDistanceTime(originAddress, destinationAddress) {
         // Convert addresses to coordinates
         const originCoords = await getAddressCoordinates(originAddress);
         const destinationCoords = await getAddressCoordinates(destinationAddress);
+
+        console.log('Origin Coordinates:', originCoords);
+        console.log('Destination Coordinates:', destinationCoords);
 
         // Format as lon,lat for OSRM
         const origin = `${originCoords.lon},${originCoords.lat}`;
@@ -49,13 +85,19 @@ async function getDistanceTime(originAddress, destinationAddress) {
                 steps: false
             }
         });
-        if (response.data && response.data.routes && response.data.routes.length > 0) {
-            const { distance, duration } = response.data.routes[0];
-            return { distance, duration };
-        } else {
+
+        // console.log('OSRM API Response:', response.data);
+        
+
+        if (!response.data || !response.data.routes || response.data.routes.length === 0) {
+            console.error('OSRM API Error:', response.data);
             throw new Error('No distance or time found for the given locations.');
         }
+
+        const { distance, duration } = response.data.routes[0];
+        return { distance, duration };
     } catch (error) {
+        console.error('Failed to fetch distance and time:', error.message);
         throw new Error('Failed to fetch distance and time.');
     }
 }
@@ -81,4 +123,16 @@ async function getSuggestions(q) {
     }));
 }
 
-export { getAddressCoordinates, getDistanceTime, getSuggestions };
+async function getCaptainsInRadius(lat, lon, rad) {
+    // console.log('Latitude:', lat, 'Longitude:', lon, 'Radius:', rad);
+    const captains = await captainModel.find({
+        location: {
+            $geoWithin: {
+                $centerSphere: [[lon, lat], rad / 6378.1] // Radius in kilometers
+            }
+        }
+    });
+    return captains;
+}
+
+export { getAddressCoordinates, getDistanceTime, getSuggestions, getCaptainsInRadius };

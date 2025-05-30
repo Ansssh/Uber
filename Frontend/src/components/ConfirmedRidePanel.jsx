@@ -5,6 +5,7 @@ import car from '../assets/11452724.png'
 import auto from '../assets/tuktuk.png'
 
 const ConfirmedRidePanel = (props) => {
+    // console.log(props.fare.vehicleSelected);
     return (
         <>
             <div className='p-5 bg-white flex flex-col gap-3'>
@@ -20,23 +21,23 @@ const ConfirmedRidePanel = (props) => {
                 <div className='flex w-full justify-start font-bold gap-4 items-center'>
                     <i className="ri-map-pin-2-line"></i>
                     <div className='flex flex-col'>
-                        <span className='font-semibold text-base'>B-34/4446</span>
-                        <span className='font-light text-sm text-gray-600'>Street 10, Durgapuri, Ludhiana</span>
+                        <span className='font-semibold text-base'>{props.location.split(",")[0]}</span>
+                        <span className='font-light text-sm text-gray-600'>{props.location.split(",").slice(0).join().length > 50 ? <>{props.location.split(",").slice(1).join().substring(0, 50)}...</> : <>{props.location.split(",").slice(0).join()}</>}</span>
                     </div>
                 </div>
                 <hr />
                 <div className='flex w-full justify-start font-bold gap-4 items-center'>
                     <i className="ri-map-pin-2-line"></i>
                     <div className='flex flex-col'>
-                        <span className='font-semibold text-base'>Modi Fabrics</span>
-                        <span className='font-light text-sm text-gray-600'>Street 5, New Shivpuri, Ludhiana</span>
+                        <span className='font-semibold text-base'>{props.destination.split(",")[0]}</span>
+                        <span className='font-light text-sm text-gray-600'>{props.destination.split(",").slice(0).join().length > 50 ? <>{props.destination.split(",").slice(1).join().substring(0, 50)}...</> : <>{props.destination.split(",").slice(0).join()}</>}</span>
                     </div>
                 </div>
                 <hr />
                 <div className='flex w-full justify-start font-bold gap-4 items-center'>
                     <i className="ri-bank-card-2-fill"></i>
                     <div className='flex flex-col'>
-                        <span className='font-semibold text-base'>$69</span>
+                        <span className='font-semibold text-base'>₹{props.money || "Hello"}</span>
                         <span className='font-light text-sm text-gray-600'>Cash</span>
                     </div>
                 </div>
@@ -44,6 +45,7 @@ const ConfirmedRidePanel = (props) => {
                 <button className='w-full bg-green-400 font-bold py-2 rounded-xl text-white' onClick={()=>{
                     props.setConfirmRidePanelOpen(false);
                     props.setLookingForDriverPanelOpen(true);
+                    props.createRide();
                 }}>Confirm</button>
             </div>
         </>

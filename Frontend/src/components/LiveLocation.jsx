@@ -25,7 +25,7 @@ function LocationMarker() {
                 const { latitude, longitude } = pos.coords;
                 const newLatLng = [latitude, longitude];
                 setPosition(newLatLng);
-                map.flyTo(newLatLng, map.getZoom());
+                map.flyTo(newLatLng, 15); // Explicitly set zoom level to 15
             },
             (err) => {
                 console.error('Geolocation Error:', err);
@@ -43,22 +43,46 @@ function LocationMarker() {
     return position ? <Marker position={position} icon={customIcon} /> : null;
 }
 
-function LiveLocationMap({ height = '100vh', width = '100vw', initialCenter = [25.0, 77.0], initialZoom = 15 }) {
+function LiveLocationMap({ height, width = '100vw', initialZoom = 15 }) {
+    const [mapCenter, setMapCenter] = useState([20.5937, 78.9629]); // Default to India's center
+    const [zoomLevel, setZoomLevel] = useState(5); // Default zoom level for India
+
+    useEffect(() => {
+        const watchId = navigator.geolocation.watchPosition(
+            (pos) => {
+                const { latitude, longitude } = pos.coords;
+                const newLatLng = [latitude, longitude];
+                setMapCenter(newLatLng);
+                setZoomLevel(6); // Set zoom level to 6 when location is found
+            },
+            (err) => {
+                console.error('Geolocation Error:', err);
+                alert('Could not retrieve your location. Defaulting to India view.');
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0,
+            }
+        );
+        return () => navigator.geolocation.clearWatch(watchId);
+    }, []);
+
     return (
         <div style={{ height, width }}>
             <MapContainer
-                center={initialCenter}
-                zoom={initialZoom}
+                center={mapCenter}
+                zoom={zoomLevel}
                 scrollWheelZoom={true}
                 style={{ height: '100%', width: '100%' }}
-                zoomControl={false}
+                zoomControl={false} // Enable zoom control
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <LocationMarker />
-                <ZoomControl position="topright" />
+                {/* <ZoomControl position="topright" /> */}
             </MapContainer>
         </div>
     );

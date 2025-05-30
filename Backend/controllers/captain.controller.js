@@ -55,7 +55,7 @@ async function loginCC(req, res, next) {
 }
 
 async function getCCProfile(req, res, next) {
-    return res.status(999).json({ captain: req.cap});
+    return res.status(200).json({ captain: req.cap});
 }
 
 async function logoutCC(req, res, next){

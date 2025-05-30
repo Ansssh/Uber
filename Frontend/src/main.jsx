@@ -6,16 +6,18 @@ import App from './App.jsx'
 import UserContext from './context/userContext.jsx'
 import CaptainContext from './context/captainContext.jsx'
 import 'remixicon/fonts/remixicon.css'
-
+import SocketProvider from './context/SocketContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <CaptainContext>
       <UserContext>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <SocketProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </SocketProvider>
       </UserContext>
     </CaptainContext>
-  </StrictMode>,
+  // </StrictMode>,
 )

@@ -30,26 +30,28 @@ async function authUser(req, res, next) {
 }
 
 
-async function authCaptain(req, res, next){
+async function authCaptain(req, res, next) {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
-    if(!token){
-        return res.status(601).json({message: "Unauthorized"});
+    console.log('Token:', token); // Debugging token
+    if (!token) {
+        return res.status(601).json({ message: "Unauthorized" });
     }
 
-    const isBlackListed = await blackListModel.findOne({token: token});
-
-    if(isBlackListed){
-        return res.status(602).json({message: "Unauthorized"});
+    const isBlackListed = await blackListModel.findOne({ token: token });
+    if (isBlackListed) {
+        return res.status(602).json({ message: "Unauthorized" });
     }
-    try{
+
+    try {
         const decode = jwt.verify(token, process.env.JWT);
         const captain = await captainModel.findById(decode._id);
+        console.log('Captain:', captain); // Debugging captain
         req.cap = captain;
 
         return next();
-
     } catch (e) {
-        return res.status(603).json({message: "Unauthorized"});
+        console.error('Error in authCaptain:', e); // Debugging error
+        return res.status(603).json({ message: "Unauthorized" });
     }
 }
 
