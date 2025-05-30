@@ -4,3 +4,10 @@
 - npx nodemon
 
 //
+
+- cd frontend
+- npx vite
+
+// 
+
+The Database is Mongodb Local.
